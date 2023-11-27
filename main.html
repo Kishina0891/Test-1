@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="all">
+        <div id="BigBox"></div>
+    </div>
+    <div class="input-form">
+        <div class="form">
+            </form>
+            <form class="login-form">
+                <H1>Product Create</H1>
+                <input id="product_name" type="text" placeholder="Name" />
+                <input id="product_price" type="text" placeholder="price" />
+                <input id="product_img" type="text" placeholder="img" />
+                <button id="btnclick">Check</button>
+            </form>
+        </div>
+    </div>
+
+
+    </div>
+</body>
+<script>
+
+
+    const btnclick = document.getElementById("btnclick")
+    btnclick.addEventListener("click", (e) => {
+        e.preventDefault()
+        const product_name = document.getElementById("product_name").value
+        console.log(product_name);
+        const product_price = document.getElementById("product_price").value
+        console.log(product_price);
+        const product_img = document.getElementById("product_img").value
+        console.log(product_img);
+        product = null
+
+        var products = [{
+            product_name: product_name,
+            product_price: product_price,
+            product_img: product_img,
+        }]
+        if (product == null) {
+            product = [products]
+            localStorage.setItem("info", JSON.stringify(products))
+            product = JSON.parse(localStorage.getItem("product"))
+            var main = document.getElementById("BigBox")
+            for (let item of product) {
+                var item_div = document.createElement("div")
+                item_div.classList.add("card")
+                item_div.innerHTML = `<div class="example-wrapper">
+    <div class="gift-card">
+      <div class="gift-card__image" style="background-image: url(${item.image})"></div>
+      <div class="gift-card__details">
+        <div class="gift-card__info">
+          <label class="gift-card__label">
+            Price:
+          </label>
+          <div class="gift-card__value" style: color="black";>
+            ${item.price}
+          </div>
+        </div>
+        <div class="gift-card__info">
+          <label class="gift-card__label">
+            Name:
+          </label>
+          <div class="gift-card__code" style: color="black";>
+             ${item.name}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>`
+                main.appendChild(item_div)
+            }
+        } else {
+            localStorage.setItem("product", JSON.stringify(products))
+            product = JSON.parse(localStorage.getItem("product"))
+            var main = document.getElementById("BigBox")
+            for (let item of product) {
+                var item_div = document.createElement("div")
+                item_div.classList.add("card")
+                item_div.innerHTML = `<div class="example-wrapper">
+   <div class="gift-card">
+      <div class="gift-card__image" style="background-image: url(${item.image})"></div>
+      <div class="gift-card__details">
+        <div class="gift-card__info">
+          <label class="gift-card__label">
+            Value
+          </label>
+          <div class="gift-card__value">
+            ${item.price}
+          </div>
+        </div>
+        <div class="gift-card__info">
+          <label class="gift-card__label">
+            Item Name:
+          </label>
+          <div class="gift-card__code">
+             ${item.price}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>`
+                main.appendChild(item_div)
+            }
+        }
+    })
+
+</script>
+
+</html>
